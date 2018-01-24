@@ -1,0 +1,29 @@
+React 性能优化方案
+
+1. React-addons-perf  react性能检测工具
+Npm o react-addons-perf  --save
+Zai app/index.js
+Important Perf from “react-addons-perf”
+Window.Perf=Perf 
+
+运行程序 在操作之前先运行  Perf.start(); 
+然后进行操作   
+运行 Perf.stop() 停止  
+再运行  Perf.printWasted() 打印出浪费性能的列表
+
+
+2.基本优化工具  PureRenderMixin 优化   render渲染方面的优化
+
+Npm i react-addons-pure-render-mixin --save
+
+Impor PureRenderMixin from “react-addons-pure-render-mixin”
+
+Constructou()
+{
+This.shouldComponentUpdate=PureRenderMixin.shouldComponentUpdate.bind(this);
+
+}
+
+
+深层次数据结构优化方案
+Immutable.js   
