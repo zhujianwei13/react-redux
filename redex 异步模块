@@ -1,0 +1,30 @@
+/**********
+
+axios  异步模块
+
+2. whatwg-fetch    es6-promise   兼容
+
+npm install whatwg-fetch  es6-promise   --save
+******/
+
+import "whatwg-fetch“
+
+import "es6-promise“
+
+
+const getdata=function(url){
+
+let result=fetch(url,{
+headers:{ "Accept":"application/json,text/plain"
+}
+
+result.then(function(data){
+ return data;
+
+})
+
+})
+
+
+
+export default {getdata}
