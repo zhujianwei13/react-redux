@@ -1,0 +1,59 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './component/App';
+import registerServiceWorker from './registerServiceWorker';
+
+import {createStore,bindActionCreators} from "redux";
+
+import reducerNav from "./component/reducers"   ;
+var sjax=require("axios")
+var actions={
+    loadnav(navdata){
+        return {
+            type:"nav"   ,
+            data:{navdata}
+        }
+    }  ,
+    sick(sickdata){
+        return{
+            type:"sick",
+            data:{sickdata}
+        }
+    }
+
+
+
+}
+
+const store=createStore(reducerNav,{sickdata:[], navdata:[]});
+const {dispatch,getState,subscribe}=store
+actions=bindActionCreators(actions,dispatch)
+
+console.log("111111111")
+function render(){
+    console.log("22222")
+    const states=getState();
+    const {navdata,sickdata}= states
+    ReactDOM.render(<App    navdata={navdata}  sickdata={sickdata} />, document.getElementById('root'));
+}
+console.log("3333333")
+subscribe(render)  ;
+console.log("44444444")
+ const navdata=[{"name":"网站首页","url":"/"},{"name":"医院介绍","url":"jieshao"},{"name":"医生团队","url":"tuandui"},{"name":"引产百科","url":""},
+     {"name":"引产费用","url":"monky"},{"name":"来院路线","url":"lx"},{"name":"在线咨询","url":"zx"},{"name":"预约挂号","url":""}]
+const sickdata=[{"name":"引产手术","url":"/"},{"name":"费用说明","url":"jieshao"},{"name":"术前检查","url":"tuandui"},{"name":"注意事项","url":""},
+    {"name":"手术过程","url":"monky"},{"name":"引产疼吗","url":"lx"},{"name":"首次流产","url":"zx"},{"name":"有流产史","url":""},{"name":"我是学生","url":""},
+    {"name":"我是白领","url":""},{"name":"我是宝妈","url":""},{"name":"了解更多","url":""}]
+
+
+sjax.get("http://localhost:3000/data.json").then(function(data){
+    console.log("555")
+    console.log("success:",1  )
+})
+console.log("6666666")
+console.log("ajas:",sjax)
+actions.loadnav(navdata);
+actions.sick(sickdata);
+console.log("777777")
+registerServiceWorker();
